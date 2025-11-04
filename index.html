@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr" class="scroll-smooth"> <!-- La classe 'dark' sera ajoutée ici par le script -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,9 +19,11 @@
         }
     </style>
     
-    <!-- Configuration Tailwind personnalisée -->
+    <!-- Configuration Tailwind et Script de chargement du thème -->
     <script>
+        // 1. Configuration de Tailwind pour le mode sombre "class"
         tailwind.config = {
+            darkMode: 'class', // Activation du mode sombre basé sur une classe
             theme: {
                 extend: {
                     colors: {
@@ -31,15 +33,36 @@
                 }
             }
         }
+
+        // 2. Script pour appliquer le thème (sombre/clair) avant le rendu de la page
+        // Cela évite le "flash" de thème clair
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
     </script>
 </head>
-<body class="bg-slate-100 text-slate-800">
+<body class="bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-200 transition-colors duration-300">
 
     <!-- En-tête -->
-    <header class="bg-white shadow-sm border-b border-slate-200">
-        <div class="container mx-auto text-center p-6 md:p-8">
-            <h1 class="text-4xl font-bold text-bleu-parfait">Guide des Réseaux Informatiques</h1>
-            <p class="mt-2 text-xl text-slate-600">Tout comprendre sur les réseaux informatiques</p>
+    <header class="bg-white shadow-sm border-b border-slate-200 dark:bg-slate-800 dark:border-slate-700 transition-colors duration-300">
+        <div class="container mx-auto flex justify-between items-center p-6 md:p-8">
+            <!-- Titre -->
+            <div class="text-left">
+                <h1 class="text-4xl font-bold text-bleu-parfait">Guide des Réseaux Informatiques</h1>
+                <p class="mt-2 text-xl text-slate-600 dark:text-slate-400">Tout comprendre sur les réseaux informatiques</p>
+            </div>
+            
+            <!-- Bouton de Thème -->
+            <div>
+                <button id="theme-toggle" class="p-2 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300" aria-label="Basculer le thème sombre">
+                    <!-- Icône Lune (Mode Sombre) -->
+                    <svg id="theme-toggle-dark-icon" class="hidden h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <!-- Icône Soleil (Mode Clair) -->
+                    <svg id="theme-toggle-light-icon" class="hidden h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 01-1.414 1.414zM4.05 15.657l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM16 10a1 1 0 01-1 1H5a1 1 0 110-2h10a1 1 0 011 1zM7.05 4.05l.707-.707a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414zM12.95 15.657l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 011.414-1.414zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -47,9 +70,9 @@
     <main class="container mx-auto mt-10 p-4 grid gap-8">
         
         <!-- Section: Introduction -->
-        <section id="introduction" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait">
-            <h2 class="text-3xl font-bold mb-5 text-slate-900">Qu'est-ce qu'un réseau ?</h2>
-            <p class="text-slate-600 leading-relaxed">
+        <section id="introduction" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait dark:bg-slate-800 transition-colors duration-300">
+            <h2 class="text-3xl font-bold mb-5 text-slate-900 dark:text-white">Qu'est-ce qu'un réseau ?</h2>
+            <p class="text-slate-600 leading-relaxed dark:text-slate-400">
                 C'est ici que nous mettrons l'introduction. Un réseau informatique est un ensemble d'équipements
                 reliés entre eux pour échanger des informations. On peut parler des ordinateurs, des serveurs,
                 des téléphones...
@@ -57,74 +80,74 @@
         </section>
 
         <!-- Section: Types de Réseaux -->
-        <section id="types-de-reseaux" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait">
-            <h2 class="text-3xl font-bold mb-5 text-slate-900">Les Types de Réseaux</h2>
-            <p class="text-slate-600 leading-relaxed mb-6">
+        <section id="types-de-reseaux" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait dark:bg-slate-800 transition-colors duration-300">
+            <h2 class="text-3xl font-bold mb-5 text-slate-900 dark:text-white">Les Types de Réseaux</h2>
+            <p class="text-slate-600 leading-relaxed mb-6 dark:text-slate-400">
                 Les réseaux sont classés selon leur étendue géographique. Voici les principaux types :
             </p>
             
             <!-- Tableau des Types de Réseaux -->
-            <div class="overflow-x-auto rounded-lg border border-slate-200 shadow-sm">
-                <table class="min-w-full divide-y divide-slate-200">
-                    <thead class="bg-slate-50">
+            <div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+                <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+                    <thead class="bg-slate-50 dark:bg-slate-700">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Type</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Signification</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Distance / Étendue</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Technologies Courantes</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Type</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Signification</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Distance / Étendue</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Technologies Courantes</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-slate-200">
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">PAN</td>
-                            <td class="px-6 py-4 text-slate-700">Personal Area Network (Réseau Personnel)</td>
-                            <td class="px-6 py-4 text-slate-700">Quelques mètres (une pièce)</td>
-                            <td class="px-6 py-4 text-slate-700">Bluetooth, USB, NFC, RFID, IR</td>
+                    <tbody class="bg-white divide-y divide-slate-200 dark:bg-slate-800 dark:divide-slate-700">
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">PAN</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Personal Area Network (Réseau Personnel)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Quelques mètres (une pièce)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Bluetooth, USB, NFC, RFID, IR</td>
                         </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">LAN</td>
-                            <td class="px-6 py-4 text-slate-700">Local Area Network (Réseau Local)</td>
-                            <td class="px-6 py-4 text-slate-700">10m à 1km (bâtiment, maison)</td>
-                            <td class="px-6 py-4 text-slate-700">Ethernet (100Base-T, 1000Base-T), Wi-Fi, CPL</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">LAN</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Local Area Network (Réseau Local)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">10m à 1km (bâtiment, maison)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Ethernet (100Base-T, 1000Base-T), Wi-Fi, CPL</td>
                         </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">MAN</td>
-                            <td class="px-6 py-4 text-slate-700">Metropolitan Area Network (Réseau Métropolitain)</td>
-                            <td class="px-6 py-4 text-slate-700">Jusqu'à 100km (une ville)</td>
-                            <td class="px-6 py-4 text-slate-700">Fibre optique, Boucle locale radio, WiMax</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">MAN</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Metropolitan Area Network (Réseau Métropolitain)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Jusqu'à 100km (une ville)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Fibre optique, Boucle locale radio, WiMax</td>
                         </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">WAN</td>
-                            <td class="px-6 py-4 text-slate-700">Wide Area Network (Réseau Étendu)</td>
-                            <td class="px-6 py-4 text-slate-700">Plus de 100km (pays, monde)</td>
-                            <td class="px-6 py-4 text-slate-700">Internet (IP), MPLS, Fibre optique, Satellite, Réseaux mobiles</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">WAN</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Wide Area Network (Réseau Étendu)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Plus de 100km (pays, monde)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Internet (IP), MPLS, Fibre optique, Satellite, Réseaux mobiles</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             
             <!-- Note d'attention WLAN -->
-            <div class="mt-6 bg-blue-50 border-l-4 border-bleu-parfait text-blue-800 p-4 rounded-r-lg" role="alert">
+            <div class="mt-6 bg-blue-50 border-l-4 border-bleu-parfait text-blue-800 p-4 rounded-r-lg dark:bg-blue-900/20 dark:text-blue-300" role="alert">
                 <p class="font-bold">Attention à ne pas confondre !</p>
                 <p>Ne confondez pas <strong>WAN</strong> (Wide Area Network, réseau étendu) et <strong>WLAN</strong> (Wireless Local Area Network, réseau local sans fil), qui est le terme technique pour désigner le Wi-Fi.</p>
             </div>
         </section>
 
         <!-- Section: Adresses IP -->
-        <section id="adresses-ip" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait">
-            <h2 class="text-3xl font-bold mb-5 text-slate-900">Les Adresses IP</h2>
-            <p class="text-slate-600 leading-relaxed mb-4">
+        <section id="adresses-ip" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait dark:bg-slate-800 transition-colors duration-300">
+            <h2 class="text-3xl font-bold mb-5 text-slate-900 dark:text-white">Les Adresses IP</h2>
+            <p class="text-slate-600 leading-relaxed mb-4 dark:text-slate-400">
                 Une adresse IP (pour <strong>Internet Protocol</strong>) est un numéro d'identification unique attribué à chaque appareil connecté à un réseau.
             </p>
-            <p class="text-slate-600 leading-relaxed">
+            <p class="text-slate-600 leading-relaxed dark:text-slate-400">
                 On l'appelle <strong>adresse logique</strong> car elle est assignée par le réseau. Elle sert à identifier l'appareil et indiquer son emplacement, un peu comme une adresse postale.
             </p>
 
-            <h3 class="text-2xl font-semibold mb-3 mt-6 text-slate-800">IP Statique vs. IP Dynamique</h3>
-            <p class="text-slate-600 leading-relaxed mb-4">
+            <h3 class="text-2xl font-semibold mb-3 mt-6 text-slate-800 dark:text-slate-200">IP Statique vs. IP Dynamique</h3>
+            <p class="text-slate-600 leading-relaxed mb-4 dark:text-slate-400">
                 Une adresse IP peut être assignée de deux manières :
             </p>
-            <ul class="list-disc list-inside space-y-2 text-slate-600">
+            <ul class="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400">
                 <li>
                     <strong>Adresse IP Statique (Fixe/permanente) :</strong> L'adresse est configurée manuellement et <strong>ne change jamais</strong>. Essentiel pour les serveurs ou les imprimantes réseau.
                 </li>
@@ -135,280 +158,135 @@
         </section>
 
         <!-- Section: Adresses MAC -->
-        <section id="adresses-mac" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait">
-            <h2 class="text-3xl font-bold mb-5 text-slate-900">Les Adresses MAC</h2>
-            <p class="text-slate-600 leading-relaxed mb-4">
+        <section id="adresses-mac" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait dark:bg-slate-800 transition-colors duration-300">
+            <h2 class="text-3xl font-bold mb-5 text-slate-900 dark:text-white">Les Adresses MAC</h2>
+            <p class="text-slate-600 leading-relaxed mb-4 dark:text-slate-400">
                 Une adresse MAC (pour <strong>Media Access Control</strong>) est un identifiant physique unique au monde, gravé sur la carte réseau d'un appareil par le fabricant.
             </p>
-            <p class="text-slate-600 leading-relaxed mb-4">
+            <p class="text-slate-600 leading-relaxed mb-4 dark:text-slate-400">
                 On l'appelle <strong>adresse physique</strong> ou <strong>adresse Ethernet</strong>. Contrairement à l'adresse IP (logique), l'adresse MAC est permanente.
             </p>
-            <p class="text-slate-600 leading-relaxed">
+            <p class="text-slate-600 leading-relaxed dark:text-slate-400">
                 Son rôle principal est de permettre la communication entre les appareils au sein d'un même réseau local (LAN). Le routeur l'utilise pour savoir exactement à quel appareil envoyer les données sur le Wi-Fi.
             </p>
         </section>
 
         <!-- Section: Protocoles -->
-        <section id="protocoles" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait">
-            <h2 class="text-3xl font-bold mb-5 text-slate-900">Les Protocoles de Communication</h2>
-            <p class="text-slate-600 leading-relaxed mb-4">
+        <section id="protocoles" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait dark:bg-slate-800 transition-colors duration-300">
+            <h2 class="text-3xl font-bold mb-5 text-slate-900 dark:text-white">Les Protocoles de Communication</h2>
+            <p class="text-slate-600 leading-relaxed mb-4 dark:text-slate-400">
                 Un <strong>protocole de communication</strong> est un ensemble de règles et de normes que les appareils doivent suivre pour échanger des données de manière fiable et ordonnée.
             </p>
-            <p class="text-slate-600 leading-relaxed mt-4">
+            <p class="text-slate-600 leading-relaxed mt-4 dark:text-slate-400">
                 Ces règles définissent tout : le format des messages, l'identification, la détection et correction d'erreurs, etc.
             </p>
-            <p class="text-slate-600 leading-relaxed mt-4">
+            <p class="text-slate-600 leading-relaxed mt-4 dark:text-slate-400">
                 Des exemples connus incluent <strong>TCP</strong> (Transmission Control Protocol) et <strong>UDP</strong> (User Datagram Protocol), qui travaillent souvent avec <strong>IP</strong> (TCP/IP).
             </p>
         </section>
 
         <!-- Section: Modes de Communication -->
-        <section id="modes-communication" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait">
-            <h2 class="text-3xl font-bold mb-5 text-slate-900">Modes de Communication</h2>
-            <p class="text-slate-600 leading-relaxed mb-6">
+        <section id="modes-communication" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait dark:bg-slate-800 transition-colors duration-300">
+            <h2 class="text-3xl font-bold mb-5 text-slate-900 dark:text-white">Modes de Communication</h2>
+            <p class="text-slate-600 leading-relaxed mb-6 dark:text-slate-400">
                 La manière dont les données sont envoyées d'un expéditeur à un ou plusieurs destinataires.
             </p>
             
-            <div class="overflow-x-auto rounded-lg border border-slate-200 shadow-sm">
-                <table class="min-w-full divide-y divide-slate-200">
-                    <thead class="bg-slate-50">
+            <div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+                <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+                    <thead class="bg-slate-50 dark:bg-slate-700">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Mode</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Principe</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Exemple d'utilisation</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Mode</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Principe</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Exemple d'utilisation</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-slate-200">
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Unicast</td>
-                            <td class="px-6 py-4 text-slate-700">De <strong>un</strong> vers <strong>un</strong>. (1 expéditeur, 1 destinataire)</td>
-                            <td class="px-6 py-4 text-slate-700">Consultation d'une page web, envoi d'un e-mail.</td>
+                    <tbody class="bg-white divide-y divide-slate-200 dark:bg-slate-800 dark:divide-slate-700">
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">Unicast</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">De <strong>un</strong> vers <strong>un</strong>. (1 expéditeur, 1 destinataire)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Consultation d'une page web, envoi d'un e-mail.</td>
                         </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Multicast</td>
-                            <td class="px-6 py-4 text-slate-700">De <strong>un</strong> vers <strong>un groupe</strong>. (1 expéditeur, plusieurs destinataires intéressés)</td>
-                            <td class="px-6 py-4 text-slate-700">Streaming vidéo en direct (ex: flux TV sur IP).</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">Multicast</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">De <strong>un</strong> vers <strong>un groupe</strong>. (1 expéditeur, plusieurs destinataires intéressés)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Streaming vidéo en direct (ex: flux TV sur IP).</td>
                         </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Diffusion (Broadcast)</td>
-                            <td class="px-6 py-4 text-slate-700">De <strong>un</strong> vers <strong>tous</strong>. (1 expéditeur, tous les destinataires du réseau)</td>
-                            <td class="px-6 py-4 text-slate-700">Demande DHCP (qui est sur le réseau ?). Les anciens <strong>Hubs</strong> fonctionnaient ainsi (obsolète).</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">Diffusion (Broadcast)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">De <strong>un</strong> vers <strong>tous</strong>. (1 expéditeur, tous les destinataires du réseau)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Demande DHCP (qui est sur le réseau ?). Les anciens <strong>Hubs</strong> fonctionnaient ainsi (obsolète).</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Section: Topologies Réseaux -->
-        <section id="topologies" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait">
-            <h2 class="text-3xl font-bold mb-5 text-slate-900">Topologies Réseaux</h2>
-            <p class="text-slate-600 leading-relaxed mb-6">
-                La topologie décrit la manière dont les appareils sont physiquement ou logiquement connectés entre eux.
+        <!-- NOUVELLE SECTION: Réseaux de Téléphonie Mobile -->
+        <section id="telephonie-mobile" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait dark:bg-slate-800 transition-colors duration-300">
+            <h2 class="text-3xl font-bold mb-5 text-slate-900 dark:text-white">Réseaux de Téléphonie Mobile</h2>
+            <p class="text-slate-600 leading-relaxed mb-6 dark:text-slate-400">
+                Les différentes générations de standards pour la communication mobile.
             </p>
             
-            <div class="overflow-x-auto rounded-lg border border-slate-200 shadow-sm">
-                <table class="min-w-full divide-y divide-slate-200">
-                    <thead class="bg-slate-50">
+            <div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+                <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+                    <thead class="bg-slate-50 dark:bg-slate-700">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Topologie</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Principe</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Avantages</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Inconvénients</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Technologie</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Génération</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Débit Théorique (DL)</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Usage Principal</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-slate-200">
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Point à Point</td>
-                            <td class="px-6 py-4 text-slate-700">Une connexion directe entre deux appareils.</td>
-                            <td class="px-6 py-4 text-slate-700">Simple, rapide, sécurisé.</td>
-                            <td class="px-6 py-4 text-slate-700">Limité à deux appareils.</td>
+                    <tbody class="bg-white divide-y divide-slate-200 dark:bg-slate-800 dark:divide-slate-700">
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">GSM</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">2G</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">9.6 Kbps</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Voix, SMS. (Obsolète pour data).</td>
                         </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Bus</td>
-                            <td class="px-6 py-4 text-slate-700">Tous les appareils sont connectés à un seul câble central (le bus).</td>
-                            <td class="px-6 py-4 text-slate-700">Simple à installer, économique.</td>
-                            <td class="px-6 py-4 text-slate-700">Si le câble central tombe, tout le réseau tombe. Collisions. (Obsolète)</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">GPRS</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">2.5G</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">~114 Kbps</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Premiers "paquets" data, MMS.</td>
                         </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Anneau</td>
-                            <td class="px-6 py-4 text-slate-700">Chaque appareil est connecté à son voisin, formant une boucle fermée.</td>
-                            <td class="px-6 py-4 text-slate-700">Pas de collisions (gestion par "jeton").</td>
-                            <td class="px-6 py-4 text-slate-700">Si un appareil tombe, le réseau tombe. Lent. (Obsolète)</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">EDGE</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">2.75G</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">~384 Kbps</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Internet mobile bas débit.</td>
                         </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Étoile</td>
-                            <td class="px-6 py-4 text-slate-700">Tous les appareils sont connectés à un point central (Switch, ou Hub obsolète).</td>
-                            <td class="px-6 py-4 text-slate-700">Robuste (si un câble tombe, seul 1 appareil est affecté), facile à gérer.</td>
-                            <td class="px-6 py-4 text-slate-700">Si le point central (Switch) tombe, tout le réseau tombe.</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">UMTS</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">3G</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">~2 Mbps</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Internet mobile, visiophonie.</td>
                         </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Arbre</td>
-                            <td class="px-6 py-4 text-slate-700">Structure hiérarchique, comme des étoiles connectées les unes aux autres.</td>
-                            <td class="px-6 py-4 text-slate-700">Très scalable, facile à étendre.</td>
-                            <td class="px-6 py-4 text-slate-700">Complexe, dépend des nœuds centraux.</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">HSPA / H+</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">3.5G / 3.75G</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">~14 à 42 Mbps</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Internet mobile "rapide" (streaming).</td>
                         </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Maille (Mesh)</td>
-                            <td class="px-6 py-4 text-slate-700">Chaque appareil peut être connecté à plusieurs autres appareils.</td>
-                            <td class="px-6 py-4 text-slate-700">Extrêmement fiable (plusieurs chemins), auto-réparant.</td>
-                            <td class="px-6 py-4 text-slate-700">Coûteux, très complexe à configurer. (Base d'Internet).</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">4G (LTE)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">4G</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">~100 à 150 Mbps</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Internet très haut débit mobile.</td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Section: Supports Filaires -->
-        <section id="supports-filaires" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait">
-            <h2 class="text-3xl font-bold mb-5 text-slate-900">Supports de Transmission Filaires</h2>
-            <p class="text-slate-600 leading-relaxed mb-6">
-                Les "câbles" utilisés pour transporter le signal réseau.
-            </p>
-            
-            <div class="overflow-x-auto rounded-lg border border-slate-200 shadow-sm">
-                <table class="min-w-full divide-y divide-slate-200">
-                    <thead class="bg-slate-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Type</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Constitution</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Connecteur</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Débit / Distance</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Usage</th>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">4G+ (LTE-A)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">4.5G</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">~300 Mbps à 1 Gbps</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Agrégation de bandes 4G.</td>
                         </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-slate-200">
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Câble Coaxial</td>
-                            <td class="px-6 py-4 text-slate-700">Âme en cuivre, isolant, tresse métallique, gaine.</td>
-                            <td class="px-6 py-4 text-slate-700">BNC (ancien LAN), F (TV)</td>
-                            <td class="px-6 py-4 text-slate-700">10 Mbps / 185m (10Base2)</td>
-                            <td class="px-6 py-4 text-slate-700">TV, Satellite. <strong>Obsolète</strong> pour les réseaux LAN.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Paires Torsadées</td>
-                            <td class="px-6 py-4 text-slate-700">4 paires de fils de cuivre torsadés. UTP (non blindé) ou STP/FTP (blindé).</td>
-                            <td class="px-6 py-4 text-slate-700">RJ45</td>
-                            <td class="px-6 py-4 text-slate-700">Cat 5e/6: 1 Gbps / 100m. Cat 6a/7: 10 Gbps / 100m.</td>
-                            <td class="px-6 py-4 text-slate-700">Réseaux LAN modernes (PC, switches, etc.)</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Fibre Optique</td>
-                            <td class="px-6 py-4 text-slate-700">Cœur de verre (silice), gaine optique. Signal lumineux. Norme <strong>G.657</strong> (insensible à la courbure) pour FTTH.</td>
-                            <td class="px-6 py-4 text-slate-700">SC, LC, ST</td>
-                            <td class="px-6 py-4 text-slate-700">> 10 Gbps sur plusieurs km.</td>
-                            <td class="px-6 py-4 text-slate-700">MAN, WAN, FTTH (Fibre à la maison), Datacenters.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">CPL (Courant Porteur)</td>
-                            <td class="px-6 py-4 text-slate-700">Utilise le réseau électrique (câbles en cuivre) existant d'un bâtiment.</td>
-                            <td class="px-6 py-4 text-slate-700">Prise de courant électrique</td>
-                            <td class="px-6 py-4 text-slate-700">~200 Mbps à 1 Gbps (très variable). Portée de quelques dizaines de mètres.</td>
-                            <td class="px-6 py-4 text-slate-700">Alternative au Wi-Fi/Ethernet pour le LAN domestique (ex: box TV).</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        
-        <!-- NOUVELLE SECTION: Supports Non-Filaires -->
-        <section id="supports-non-filaires" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-bleu-parfait">
-            <h2 class="text-3xl font-bold mb-5 text-slate-900">Supports de Transmission Non-Filaires (Sans Fil)</h2>
-            <p class="text-slate-600 leading-relaxed mb-6">
-                Transmission des données via des ondes (radio, infrarouge) dans l'air.
-            </p>
-            
-            <div class="overflow-x-auto rounded-lg border border-slate-200 shadow-sm">
-                <table class="min-w-full divide-y divide-slate-200">
-                    <thead class="bg-slate-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Technologie</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Norme(s)</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Fréquence</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Débit Théorique</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Portée</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Usage</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-slate-200">
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">IrDa (Infrarouge)</td>
-                            <td class="px-6 py-4 text-slate-700">IrDA</td>
-                            <td class="px-6 py-4 text-slate-700">Lumière infrarouge</td>
-                            <td class="px-6 py-4 text-slate-700">~4 Mbps</td>
-                            <td class="px-6 py-4 text-slate-700">< 1m (directif)</td>
-                            <td class="px-6 py-4 text-slate-700">Télécommandes. <strong>Obsolète</strong> pour les données.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Bluetooth</td>
-                            <td class="px-6 py-4 text-slate-700">IEEE 802.15.1</td>
-                            <td class="px-6 py-4 text-slate-700">2.4 GHz</td>
-                            <td class="px-6 py-4 text-slate-700">~3 à 50 Mbps</td>
-                            <td class="px-6 py-4 text-slate-700">~1m à 100m</td>
-                            <td class="px-6 py-4 text-slate-700">PAN (casques, souris, IoT).</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Wi-Fi 1 (11b)</td>
-                            <td class="px-6 py-4 text-slate-700">802.11b</td>
-                            <td class="px-6 py-4 text-slate-700">2.4 GHz</td>
-                            <td class="px-6 py-4 text-slate-700">11 Mbps</td>
-                            <td class="px-6 py-4 text-slate-700">~35-100m</td>
-                            <td class="px-6 py-4 text-slate-700">Premiers WLAN (obsolète).</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Wi-Fi 2 (11a)</td>
-                            <td class="px-6 py-4 text-slate-700">802.11a</td>
-                            <td class="px-6 py-4 text-slate-700">5 GHz</td>
-                            <td class="px-6 py-4 text-slate-700">54 Mbps</td>
-                            <td class="px-6 py-4 text-slate-700">~35-120m</td>
-                            <td class="px-6 py-4 text-slate-700">Premiers WLAN (obsolète).</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Wi-Fi 3 (11g)</td>
-                            <td class="px-6 py-4 text-slate-700">802.11g</td>
-                            <td class="px-6 py-4 text-slate-700">2.4 GHz</td>
-                            <td class="px-6 py-4 text-slate-700">54 Mbps</td>
-                            <td class="px-6 py-4 text-slate-700">~38-140m</td>
-                            <td class="px-6 py-4 text-slate-700">Premiers WLAN (obsolète).</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Wi-Fi 4 (11n)</td>
-                            <td class="px-6 py-4 text-slate-700">802.11n</td>
-                            <td class="px-6 py-4 text-slate-700">2.4 GHz / 5 GHz</td>
-                            <td class="px-6 py-4 text-slate-700">~150 à 600 Mbps</td>
-                            <td class="px-6 py-4 text-slate-700">~70-250m</td>
-                            <td class="px-6 py-4 text-slate-700">WLAN courant.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Wi-Fi 5 (11ac)</td>
-                            <td class="px-6 py-4 text-slate-700">802.11ac</td>
-                            <td class="px-6 py-4 text-slate-700">5 GHz</td>
-                            <td class="px-6 py-4 text-slate-700">~433 Mbps à 3.5 Gbps</td>
-                            <td class="px-6 py-4 text-slate-700">~80m</td>
-                            <td class="px-6 py-4 text-slate-700">WLAN moderne (vidéo HD/4K).</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Wi-Fi 6 (11ax)</td>
-                            <td class="px-6 py-4 text-slate-700">802.11ax</td>
-                            <td class="px-6 py-4 text-slate-700">2.4 / 5 GHz (6 GHz = 6E)</td>
-                            <td class="px-6 py-4 text-slate-700">~600 Mbps à 9.6 Gbps</td>
-                            <td class="px-6 py-4 text-slate-700">~80m (gère mieux la densité)</td>
-                            <td class="px-6 py-4 text-slate-700">WLAN très haute densité, IoT.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">WiMax</td>
-                            <td class="px-6 py-4 text-slate-700">IEEE 802.16</td>
-                            <td class="px-6 py-4 text-slate-700">2.5 - 5.8 GHz</td>
-                            <td class="px-6 py-4 text-slate-700">~40-70 Mbps</td>
-                            <td class="px-6 py-4 text-slate-700">Jusqu'à 50-70 km</td>
-                            <td class="px-6 py-4 text-slate-700">MAN (Internet rural, boucle locale).</td>
-                        </tr>
-                         <tr class="hover:bg-slate-50">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900">Satellite</td>
-                            <td class="px-6 py-4 text-slate-700">DVB-S2/RCS</td>
-                            <td class="px-6 py-4 text-slate-700">Bandes C, Ku, Ka</td>
-                            <td class="px-6 py-4 text-slate-700">~20-100 Mbps (variable)</td>
-                            <td class="px-6 py-4 text-slate-700">Globale (GEO, LEO)</td>
-                            <td class="px-6 py-4 text-slate-700">WAN (zones isolées, maritime, avion).</td>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-700">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-white">5G (NR)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">5G</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">> 1 Gbps (jusqu'à 10 Gbps)</td>
+                            <td class="px-6 py-4 text-slate-700 dark:text-slate-300">Très faible latence, IoT massif, VR.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -418,14 +296,53 @@
     </main>
 
     <!-- Pied de page -->
-    <footer class="text-center p-8 bg-slate-800 text-slate-300 mt-12">
+    <footer class="text-center p-8 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 mt-12 border-t border-slate-200 dark:border-slate-700 transition-colors duration-300">
         <div class="container mx-auto">
             <p>&copy; 2025 - Votre Nom / Nom du Site. Hébergé via GitHub et Vercel.</p>
         </div>
     </footer>
 
+    <!-- Script pour la logique du bouton de thème -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Fonction pour mettre à jour l'icône en fonction du thème
+        function updateIcon() {
+            if (document.documentElement.classList.contains('dark')) {
+                themeToggleDarkIcon.classList.remove('hidden');
+                themeToggleLightIcon.classList.add('hidden');
+            } else {
+                themeToggleDarkIcon.classList.add('hidden');
+                themeToggleLightIcon.classList.remove('hidden');
+            }
+        }
+
+        // Afficher la bonne icône au chargement de la page
+        updateIcon();
+
+        // Écouteur d'événement pour le clic sur le bouton
+        themeToggleBtn.addEventListener('click', () => {
+            // Basculer la classe 'dark' sur la balise <html>
+            document.documentElement.classList.toggle('dark');
+
+            let theme;
+            // Mettre à jour le localStorage
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+                theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+                theme = 'light';
+            }
+            
+            // Mettre à jour l'icône
+            updateIcon();
+        });
+    </script>
+
 </body>
 </html>
-
 
 
