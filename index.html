@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Réseaux Informatiques - Accueil</title>
+    <!-- Importation de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuration pour la police Inter -->
+    <style>
+        html {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Configuration personnalisée de Tailwind pour votre "bleu parfait" -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // J'ajoute votre "bleu parfait" (turquoise) ici
+                        // J'utilise 'cyan-500' comme équivalent, dites-moi si vous voulez ajuster !
+                        'bleu-parfait': '#06B6D4', // C'est un joli turquoise (cyan-500)
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- ================= En-tête ================= -->
+    <!-- Utilisation de votre couleur personnalisée 'bleu-parfait' -->
+    <header class="bg-bleu-parfait text-white p-6 shadow-md rounded-b-lg">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold">Mon Site sur les Réseaux</h1>
+            <p class="mt-2 text-xl">Tout comprendre sur les réseaux informatiques</p>
+        </div>
+    </header>
+
+    <!-- ================= Contenu Principal ================= -->
+    <main class="container mx-auto mt-10 p-4">
+        
+        <!-- Section d'introduction (placeholder) -->
+        <section id="introduction" class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-3xl font-semibold mb-4 text-bleu-parfait">Qu'est-ce qu'un réseau ?</h2>
+            <p class="text-gray-700 leading-relaxed">
+                C'est ici que nous mettrons l'introduction. Un réseau informatique est un ensemble d'équipements
+                reliés entre eux pour échanger des informations. On peut parler des ordinateurs, des serveurs,
+                des téléphones...
+            </p>
+        </section>
+
+        <!-- Section sur les types de réseaux (placeholder) -->
+        <section id="types-de-reseaux" class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-3xl font-semibold mb-4 text-bleu-parfait">Les Types de Réseaux</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Ici, nous pourrions détailler les différents types de réseaux :
+            </p>
+            <ul class="list-disc list-inside mt-4 text-gray-700">
+                <li>LAN (Local Area Network)</li>
+                <li>WAN (Wide Area Network)</li>
+                <li>MAN (Metropolitan Area Network)</li>
+                <li>Etc.</li>
+            </ul>
+        </section>
+
+        <!-- ================= Section Adresses IP ================= -->
+        <section id="adresses-ip" class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-3xl font-semibold mb-4 text-bleu-parfait">Les Adresses IP</h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+                Une adresse IP (pour <strong>Internet Protocol</strong>) est un numéro d'identification unique attribué à chaque appareil connecté à un réseau informatique, que ce soit Internet ou un réseau local.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+                On l'appelle une <strong>adresse logique</strong> car elle n'est pas physiquement liée à l'appareil (comme une adresse MAC), mais lui est assignée par le réseau. Elle sert à deux choses principales : identifier l'appareil et indiquer son emplacement sur le réseau, un peu comme une adresse postale permet de savoir qui vous êtes et où vous habitez pour recevoir du courrier.
+            </p>
+
+            <h3 class="text-2xl font-semibold mb-3 mt-6 text-gray-800">IP Statique vs. IP Dynamique</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+                Une adresse IP peut être assignée de deux manières différentes :
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li>
+                    <strong>Adresse IP Statique (Fixe ou permanente) :</strong> L'adresse est configurée manuellement sur l'appareil et <strong>ne change jamais</strong>. C'est essentiel pour les serveurs, les imprimantes réseau ou tout appareil qui doit être trouvé de manière fiable à la même "adresse" en permanence.
+                </li>
+                <li>
+                    <strong>Adresse IP Dynamique (Non-statique ou temporaire) :</strong> L'adresse est attribuée <strong>automatiquement</strong> et de manière temporaire à l'appareil lorsqu'il se connecte au réseau, généralement par un service appelé DHCP (Dynamic Host Configuration Protocol). C'est le cas le plus courant pour nos ordinateurs et smartphones à la maison. L'adresse peut changer à chaque nouvelle connexion.
+                </li>
+            </ul>
+        </section>
+
+        <!-- D'autres sections viendront ici... -->
+
+    </main>
+
+    <!-- ================= Pied de page ================= -->
+    <footer class="text-center p-6 bg-gray-800 text-gray-300 mt-12 rounded-t-lg">
+        <div class="container mx-auto">
+            <p>&copy; 2025 - Votre Nom / Nom du Site. Hébergé via GitHub et Vercel.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
